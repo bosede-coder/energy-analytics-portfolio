@@ -58,7 +58,7 @@ Option 1 — Streamlit Community Cloud (recommended)
 2. Go to share.streamlit.io and connect your GitHub
 3. Deploy — you get a public URL at `yourname-ercot-dashboard.streamlit.app`
 
-Option 2 — Hugging Face Spaces**
+Option 2 — Hugging Face Spaces
 1. Create a Space at huggingface.co/spaces
 2. Choose Streamlit as the SDK
 3. Upload the files — instant public deployment
