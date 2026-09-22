@@ -133,17 +133,21 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ── CHART TEMPLATE ────────────────────────────────────────────────────────────
-CHART_TEMPLATE = dict(
-    layout=dict(
-        paper_bgcolor="#161b22",
-        plot_bgcolor="#0d1117",
-        font=dict(family="IBM Plex Mono", color="#8b949e", size=11),
-        xaxis=dict(gridcolor="#21262d", linecolor="#21262d", zerolinecolor="#21262d"),
-        yaxis=dict(gridcolor="#21262d", linecolor="#21262d", zerolinecolor="#21262d"),
-        margin=dict(l=50, r=20, t=40, b=40),
-        legend=dict(bgcolor="#161b22", bordercolor="#21262d", borderwidth=1)
-    )
+CHART_LAYOUT = dict(
+    paper_bgcolor="#161b22",
+    plot_bgcolor="#0d1117",
+    font=dict(family="IBM Plex Mono", color="#8b949e", size=11),
+    xaxis=dict(gridcolor="#21262d", linecolor="#21262d", zerolinecolor="#21262d"),
+    yaxis=dict(gridcolor="#21262d", linecolor="#21262d", zerolinecolor="#21262d"),
+    margin=dict(l=50, r=20, t=40, b=40),
+    legend=dict(bgcolor="#161b22", bordercolor="#21262d", borderwidth=1)
 )
+
+def chart_layout(**overrides):
+    """Return chart layout with optional overrides."""
+    base = CHART_LAYOUT.copy()
+    base.update(overrides)
+    return base
 AMBER  = "#f0a500"
 BLUE   = "#58a6ff"
 GREEN  = "#3fb950"
@@ -418,13 +422,7 @@ with col_lmp:
             mode="markers", name="Price spike",
             marker=dict(color=RED, size=6, symbol="circle")
         ))
-    fig_lmp.update_layout(
-        **CHART_TEMPLATE["layout"],
-        height=300,
-        yaxis_title="$/MWh",
-        xaxis_title=None,
-        hovermode="x unified"
-    )
+    fig_lmp.update_layout(**chart_layout(height=300, yaxis_title="$/MWh", xaxis_title=None, hovermode="x unified"))
     st.plotly_chart(fig_lmp, use_container_width=True)
 
 with col_gen:
@@ -446,12 +444,7 @@ with col_gen:
         font=dict(family="IBM Plex Mono", size=13, color="#8b949e"),
         showarrow=False
     )
-    fig_gen.update_layout(
-        **CHART_TEMPLATE["layout"],
-        height=300,
-        showlegend=False,
-        margin=dict(l=10, r=10, t=30, b=10)
-    )
+    fig_gen.update_layout(**chart_layout(height=300, showlegend=False, margin=dict(l=10, r=10, t=30, b=10)))
     st.plotly_chart(fig_gen, use_container_width=True)
 
 # ── ROW 2: LOAD FORECAST + WEATHER ───────────────────────────────────────────
@@ -476,12 +469,7 @@ with col_load:
         annotation_text="now",
         annotation_font=dict(color="#8b949e", size=10, family="IBM Plex Mono")
     )
-    fig_load.update_layout(
-        **CHART_TEMPLATE["layout"],
-        height=260,
-        yaxis_title="GW",
-        hovermode="x unified"
-    )
+    fig_load.update_layout(**chart_layout(height=260, yaxis_title="GW", hovermode="x unified"))
     st.plotly_chart(fig_load, use_container_width=True)
 
 with col_wx:
@@ -502,15 +490,7 @@ with col_wx:
             name="Wind (mph)", yaxis="y2",
             marker_color=BLUE, opacity=0.4
         ))
-        fig_wx.update_layout(
-            **CHART_TEMPLATE["layout"],
-            height=260,
-            yaxis=dict(title="°F", gridcolor="#21262d"),
-            yaxis2=dict(title="mph", overlaying="y", side="right",
-                        gridcolor="rgba(0,0,0,0)"),
-            legend=dict(orientation="h", y=1.1),
-            hovermode="x unified"
-        )
+        fig_wx.update_layout(**chart_layout(height=260, yaxis=dict(title="°F", gridcolor="#21262d"), yaxis2=dict(title="mph", overlaying="y", side="right", gridcolor="rgba(0,0,0,0)"), legend=dict(orientation="h", y=1.1), hovermode="x unified"))
         st.plotly_chart(fig_wx, use_container_width=True)
     else:
         st.info("Weather API unavailable. Check internet connection.")
@@ -538,10 +518,7 @@ with col_hist:
         line=dict(color=BLUE, width=1, dash="dot"),
         fill="tonexty", fillcolor="rgba(88,166,255,0.04)"
     ))
-    fig_hist.update_layout(
-        **CHART_TEMPLATE["layout"],
-        height=260, yaxis_title="$/MWh", hovermode="x unified"
-    )
+    fig_hist.update_layout(**chart_layout(height=260, yaxis_title="$/MWh", hovermode="x unified"))
     st.plotly_chart(fig_hist, use_container_width=True)
 
 with col_heat:
@@ -562,12 +539,7 @@ with col_heat:
         textposition="outside",
         textfont=dict(family="IBM Plex Mono", size=10, color="#8b949e")
     ))
-    fig_bar.update_layout(
-        **CHART_TEMPLATE["layout"],
-        height=260,
-        xaxis_title="$/MWh",
-        margin=dict(l=10, r=60, t=20, b=30)
-    )
+    fig_bar.update_layout(**chart_layout(height=260, xaxis_title="$/MWh", margin=dict(l=10, r=60, t=20, b=30)))
     st.plotly_chart(fig_bar, use_container_width=True)
 
 # ── ROW 4: ARBITRAGE OPPORTUNITY TABLE ───────────────────────────────────────
