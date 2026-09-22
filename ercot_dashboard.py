@@ -36,23 +36,23 @@ st.markdown("""
 
   html, body, [class*="css"] {
     font-family: 'IBM Plex Sans', sans-serif;
-    background-color: #0047AB;
+    background-color: #020B3A;
     color: #e0edff;
   }
-  .main { background-color: #0047AB; }
-  .stApp { background-color: #0047AB; }
+  .main { background-color: #020B3A; }
+  .stApp { background-color: #020B3A; }
 
   /* Metric cards */
   [data-testid="metric-container"] {
     background: #161b22;
-    border: 1px solid #3a7bd5;
+    border: 1px solid #1a3a8f;
     border-radius: 6px;
     padding: 12px 16px;
   }
   [data-testid="stMetricLabel"] {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
-    color: #e8f0ff;
+    color: #a8c4ff;
     letter-spacing: 0.08em;
   }
   [data-testid="stMetricValue"] {
@@ -68,25 +68,25 @@ st.markdown("""
 
   /* Sidebar */
   [data-testid="stSidebar"] {
-    background-color: #0057C8;
-    border-right: 1px solid #3a7bd5;
+    background-color: #051060;
+    border-right: 1px solid #1a3a8f;
   }
   [data-testid="stSidebar"] .stSelectbox label,
   [data-testid="stSidebar"] .stDateInput label {
-    color: #e8f0ff;
+    color: #a8c4ff;
     font-size: 12px;
     font-family: 'IBM Plex Mono', monospace;
   }
 
   /* Headers */
   h1 { color: #ffffff; font-weight: 600; font-size: 20px !important; }
-  h2 { color: #ffffff; font-weight: 500; font-size: 15px !important; border-bottom: 1px solid #3a7bd5; padding-bottom: 6px; }
-  h3 { color: #e8f0ff; font-weight: 400; font-size: 13px !important; }
+  h2 { color: #ffffff; font-weight: 500; font-size: 15px !important; border-bottom: 1px solid #1a3a8f; padding-bottom: 6px; }
+  h3 { color: #a8c4ff; font-weight: 400; font-size: 13px !important; }
 
   /* Status badge */
   .status-live {
     display: inline-block;
-    background: #1a5fb4;
+    background: #0a2a6e;
     color: #3fb950;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
@@ -97,7 +97,7 @@ st.markdown("""
   }
   .status-demo {
     display: inline-block;
-    background: #1a5fb4;
+    background: #1a2a6e;
     color: #f0a500;
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
@@ -108,17 +108,17 @@ st.markdown("""
   }
 
   /* Section divider */
-  hr { border: none; border-top: 1px solid #3a7bd5; margin: 8px 0; }
+  hr { border: none; border-top: 1px solid #1a3a8f; margin: 8px 0; }
 
   /* Info box */
   .info-box {
     background: #161b22;
-    border: 1px solid #3a7bd5;
+    border: 1px solid #1a3a8f;
     border-left: 3px solid #58a6ff;
     border-radius: 4px;
     padding: 10px 14px;
     font-size: 13px;
-    color: #e8f0ff;
+    color: #a8c4ff;
     margin: 8px 0;
   }
 
@@ -134,13 +134,13 @@ st.markdown("""
 
 # ── CHART TEMPLATE ────────────────────────────────────────────────────────────
 CHART_LAYOUT = dict(
-    paper_bgcolor="#0057C8",
-    plot_bgcolor="#0047AB",
-    font=dict(family="IBM Plex Mono", color="#e8f0ff", size=11),
-    xaxis=dict(gridcolor="#3a7bd5", linecolor="#3a7bd5", zerolinecolor="#3a7bd5"),
-    yaxis=dict(gridcolor="#3a7bd5", linecolor="#3a7bd5", zerolinecolor="#3a7bd5"),
+    paper_bgcolor="#051060",
+    plot_bgcolor="#020B3A",
+    font=dict(family="IBM Plex Mono", color="#a8c4ff", size=11),
+    xaxis=dict(gridcolor="#1a3a8f", linecolor="#1a3a8f", zerolinecolor="#1a3a8f"),
+    yaxis=dict(gridcolor="#1a3a8f", linecolor="#1a3a8f", zerolinecolor="#1a3a8f"),
     margin=dict(l=50, r=20, t=40, b=40),
-    legend=dict(bgcolor="#0057C8", bordercolor="#3a7bd5", borderwidth=1)
+    legend=dict(bgcolor="#051060", bordercolor="#1a3a8f", borderwidth=1)
 )
 
 def chart_layout(**overrides):
@@ -441,7 +441,7 @@ with col_gen:
     ))
     fig_gen.add_annotation(
         text="Grid<br>Mix", x=0.5, y=0.5,
-        font=dict(family="IBM Plex Mono", size=13, color="#e8f0ff"),
+        font=dict(family="IBM Plex Mono", size=13, color="#a8c4ff"),
         showarrow=False
     )
     fig_gen.update_layout(**chart_layout(height=300, showlegend=False, margin=dict(l=10, r=10, t=30, b=10)))
@@ -465,9 +465,9 @@ with col_load:
     ))
     fig_load.add_vline(
         x=datetime.now().timestamp() * 1000,
-        line=dict(color="#e8f0ff", dash="dash", width=1),
+        line=dict(color="#a8c4ff", dash="dash", width=1),
         annotation_text="now",
-        annotation_font=dict(color="#e8f0ff", size=10, family="IBM Plex Mono")
+        annotation_font=dict(color="#a8c4ff", size=10, family="IBM Plex Mono")
     )
     fig_load.update_layout(**chart_layout(height=260, yaxis_title="GW", hovermode="x unified"))
     st.plotly_chart(fig_load, use_container_width=True)
@@ -490,7 +490,7 @@ with col_wx:
             name="Wind (mph)", yaxis="y2",
             marker_color=BLUE, opacity=0.4
         ))
-        fig_wx.update_layout(**chart_layout(height=260, yaxis=dict(title="°F", gridcolor="#3a7bd5"), yaxis2=dict(title="mph", overlaying="y", side="right", gridcolor="rgba(0,0,0,0)"), legend=dict(orientation="h", y=1.1), hovermode="x unified"))
+        fig_wx.update_layout(**chart_layout(height=260, yaxis=dict(title="°F", gridcolor="#1a3a8f"), yaxis2=dict(title="mph", overlaying="y", side="right", gridcolor="rgba(0,0,0,0)"), legend=dict(orientation="h", y=1.1), hovermode="x unified"))
         st.plotly_chart(fig_wx, use_container_width=True)
     else:
         st.info("Weather API unavailable. Check internet connection.")
@@ -537,7 +537,7 @@ with col_heat:
         marker_line_width=1.5,
         text=[f"${v:.2f}" for v in nodes_df["lmp"]],
         textposition="outside",
-        textfont=dict(family="IBM Plex Mono", size=10, color="#e8f0ff")
+        textfont=dict(family="IBM Plex Mono", size=10, color="#a8c4ff")
     ))
     fig_bar.update_layout(**chart_layout(height=260, xaxis_title="$/MWh", margin=dict(l=10, r=60, t=20, b=30)))
     st.plotly_chart(fig_bar, use_container_width=True)
